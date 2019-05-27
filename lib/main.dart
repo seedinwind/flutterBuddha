@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'playerpage.dart';
+import 'videolistpage.dart';
+import 'learnpage.dart';
+import 'thinkpage.dart';
+import 'practicepage.dart';
+
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -44,18 +49,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  int _selectIndex = 0;
+  var pages = [
+    LearnPage(),
+    ThinkPage(),
+    PracticePage()
+  ];
+  var _pageController = PageController()
 
   @override
   Widget build(BuildContext context) {
@@ -66,42 +66,56 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: ListView.separated(
-            itemBuilder:(context, index) {
-              return _buildnItem(context, index);
-            },
-          separatorBuilder: (context,index){
-              return Divider(color: Color.fromARGB(255, 100, 100, 100),);
-          },
-          itemCount: 20,
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
         ),
-      ),
-      drawer: Drawer(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        body: Center(
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: PageView.builder(itemBuilder: _pageCreator,
+            onPageChanged: _onPageChange,
+            itemCount: 3,
+            controller: _pageController,),
+        ),
+        drawer: Drawer(),
+        // This trailing comma makes auto-formatting nicer for build methods.
+        bottomNavigationBar: BottomNavigationBar(
+          items: _createNavigationBar(),
+          onTap: _onNavigationItemSelect,
+          currentIndex: _selectIndex,
+        ));
   }
-}
 
-Widget _buildnItem(BuildContext context, int index) {
-       return GestureDetector(child: Center(
-         child: Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
-           child: Text("十善业道经第"+index.toString()+"讲"),),
-       ),
-       onTap: (){
-         Navigator.push(context, MaterialPageRoute(builder: (context){
-           return PlayerPage(url:"http://47.94.95.216/19-014-0001.mp4");
-         }));
-       },);
+  List<BottomNavigationBarItem> _createNavigationBar() {
+    return [
+      BottomNavigationBarItem(
+          icon: ImageIcon(ExactAssetImage("assets/images/icon.png")),
+          title: Text("闻")),
+      BottomNavigationBarItem(
+          icon: ImageIcon(ExactAssetImage("assets/images/icon.png")),
+          title: Text("思")),
+      BottomNavigationBarItem(
+          icon: ImageIcon(ExactAssetImage("assets/images/icon.png")),
+          title: Text("修"))
+    ];
+  }
+
+  _onNavigationItemSelect(index) {
+    setState(() {
+      _selectIndex = index;
+      _pageController.jumpToPage(index);
+    });
+  }
+
+  Widget _pageCreator(BuildContext context, int index) {
+    return pages[index];
+  }
+
+  void _onPageChange(int value) {
+    setState(() {
+      _selectIndex = value;
+    });
+  }
 }
