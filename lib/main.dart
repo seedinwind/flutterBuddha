@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ThinkPage(),
     PracticePage()
   ];
-  var _pageController = PageController()
+  var _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,7 @@ import 'package:video_player/video_player.dart';
 class PlayerPage extends StatefulWidget {
   var url;
 
-  PlayerPage({url: String}) {
-    this.url = url;
-  }
+  PlayerPage({this.url});
 
   @override
   _PlayerState createState() {
