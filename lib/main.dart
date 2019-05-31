@@ -3,12 +3,13 @@ import 'videolistpage.dart';
 import 'learnpage.dart';
 import 'thinkpage.dart';
 import 'practicepage.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,6 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   var _pageController = PageController();
 
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -65,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     return Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by

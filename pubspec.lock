@@ -8,13 +8,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.8"
-  banner_view:
-    dependency: "direct main"
-    description:
-      name: banner_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -48,6 +41,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter

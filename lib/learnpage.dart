@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'widget/bannerview.dart';
+import 'dart:ui';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LearnPage extends StatefulWidget {
   @override
@@ -24,7 +26,7 @@ class _LearnPageState extends State<LearnPage> {
             (context) {
               return Positioned(
                 height: 20,
-                width: 200,
+                width:ScreenUtil.getInstance().setWidth(1080),
                 bottom: 10,
                 child:Center(child:Text("indicator")),
               );
