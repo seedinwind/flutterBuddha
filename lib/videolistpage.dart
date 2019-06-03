@@ -23,7 +23,7 @@ class _VideoListState extends State<VideoListPage>{
         // in the middle of the parent.
         child: ListView.separated(
           itemBuilder:(context, index) {
-            return _buildnItem(context, index);
+            return _buildItem(context, index);
           },
           separatorBuilder: (context,index){
             return Divider(color: Color.fromARGB(255, 100, 100, 100),);
@@ -36,7 +36,7 @@ class _VideoListState extends State<VideoListPage>{
 
 }
 
-Widget _buildnItem(BuildContext context, int index) {
+Widget _buildItem(BuildContext context, int index) {
   return GestureDetector(child: Center(
     child: Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
       child: Text("十善业道经第"+index.toString()+"讲"),),

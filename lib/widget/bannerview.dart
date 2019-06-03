@@ -132,7 +132,7 @@ class _BannerViewState extends State<BannerView> {
       } else if (index == widget.itemCount + 1) {
         item = widget.itemBuilder(context, 0);
       } else {
-        item = widget.itemBuilder(context, index);
+        item = widget.itemBuilder(context, index - 1);
       }
     } else {
       item = widget.itemBuilder(context, index);
@@ -178,7 +178,11 @@ class _BannerViewState extends State<BannerView> {
     } else {
       this._currentIndex--;
     }
-    this._currentIndex = this._currentIndex % widget.itemCount;
+    if (widget.cycleRolling) {
+      this._currentIndex = this._currentIndex % (widget.itemCount + 2);
+    } else {
+      this._currentIndex = this._currentIndex % widget.itemCount;
+    }
     if (0 == this._currentIndex) {
       this._pageController.jumpToPage(this._currentIndex);
       this._nextBannerTask();
@@ -212,8 +216,8 @@ class _BannerViewState extends State<BannerView> {
       }
       try {
         if (this._currentIndex == 0) {
-          this._pageController.jumpToPage(this.widget.itemCount - 2);
-        } else if (this._currentIndex == this.widget.itemCount - 1) {
+          this._pageController.jumpToPage(this.widget.itemCount );
+        } else if (this._currentIndex == this.widget.itemCount + 1) {
           this._pageController.jumpToPage(1);
         }
       } catch (e) {
