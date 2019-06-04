@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'playerpage.dart';
 import 'bloc/poembloc.dart';
-import 'package:dio/dio.dart';
 import 'data/Poem.dart';
-import 'dart:convert';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'event/poemEvent.dart';
+import 'state/states.dart';
 
 class VideoListPage extends StatefulWidget {
   @override
@@ -17,9 +18,8 @@ class _VideoListState extends State<VideoListPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    bloc.fetchInitData();
+    bloc.dispatch(PoemEvent());
   }
 
   @override
@@ -33,25 +33,29 @@ class _VideoListState extends State<VideoListPage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: StreamBuilder<Response>(
-            stream: bloc.dataStream,
-            initialData: Response(),
-            builder: (context, snapshot) {
-              return ListView.separated(
-                itemBuilder: (context, index) {
-                  if(snapshot.hasData&&null!=snapshot.data.data) {
-                    PoemList poems = PoemList.fromJson(snapshot.data.data);
-                    return _buildItem(context, index, poems);
+        child: BlocProvider(
+            bloc: bloc,
+            child: BlocBuilder(
+                bloc: bloc,
+                builder: (context, state) {
+                  if (state is PoemListLoaded) {
+                    return ListView.separated(
+                      itemBuilder: (context, index) {
+                        return _buildItem(context, index, state.poems);
+                      },
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Color.fromARGB(255, 100, 100, 100),
+                        );
+                      },
+                      itemCount: state.poems.poems == null
+                          ? 0
+                          : state.poems.poems.length,
+                    );
+                  } else {
+//              return  showEmpty();
                   }
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    color: Color.fromARGB(255, 100, 100, 100),
-                  );
-                },
-                itemCount: 20,
-              );
-            }),
+                })),
       ),
     );
   }
