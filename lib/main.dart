@@ -93,7 +93,13 @@ class _MyHomePageState extends State<MyHomePage> {
           items: _createNavigationBar(),
           onTap: _onNavigationItemSelect,
           currentIndex: _selectIndex,
-        ));
+        ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return VideoListPage();
+        }));
+      }),
+    );
   }
 
   List<BottomNavigationBarItem> _createNavigationBar() {
