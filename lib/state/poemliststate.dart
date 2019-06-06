@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
-import '../data/Poem.dart';
+import '../data/poem.dart';
 
 abstract class PoemListState extends Equatable {
   PoemListState([List props = const []]) : super(props);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'playerpage.dart';
 import 'bloc/poembloc.dart';
-import 'data/Poem.dart';
+import 'data/poem.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'event/poemEvent.dart';
 import 'state/states.dart';
