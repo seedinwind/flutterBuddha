@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'playerpage.dart';
-import 'bloc/poembloc.dart';
-import 'data/poem.dart';
+import 'package:buddhawise/page/playerpage.dart';
+import '../bloc/blocs.dart';
+import '../data/datas.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'event/poemEvent.dart';
-import 'state/states.dart';
+import '../event/poemEvent.dart';
+import '../state/states.dart';
 
 class VideoListPage extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class VideoListPage extends StatefulWidget {
 class _VideoListState extends State<VideoListPage> {
   PoemBloc bloc = PoemBloc();
 
-  @override
+   @override
   void initState() {
     super.initState();
     bloc.dispatch(PoemEvent());

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'videolistpage.dart';
-import 'learnpage.dart';
-import 'thinkpage.dart';
-import 'practicepage.dart';
+import 'package:buddhawise/page/videolistpage.dart';
+import 'package:buddhawise/page/learnpage.dart';
+import 'package:buddhawise/page/thinkpage.dart';
+import 'package:buddhawise/page/practicepage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() => runApp(MyApp());
